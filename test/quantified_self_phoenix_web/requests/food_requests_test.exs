@@ -35,8 +35,7 @@ defmodule QuantifiedSelfPhoenixWeb.FoodRequestsTest do
     response = get conn, "/api/v1/foods/2"
     body = json_response(response, 200)
 
-    assert length(body) == 1
-    assert body["name"] == response[:name]
-    assert body["calories"] == response[:calories]
+    assert body["name"] == expected[:name]
+    assert body["calories"] == expected[:calories]
   end
 end

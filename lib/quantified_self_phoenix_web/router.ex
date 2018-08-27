@@ -8,6 +8,7 @@ defmodule QuantifiedSelfPhoenixWeb.Router do
   scope "/api/v1", QuantifiedSelfPhoenixWeb.Api.V1 do
     pipe_through :api
 
-    get "/foods", FoodsController, :index 
+    get "/foods", FoodsController, :index
+    get "/foods/:id", FoodsController, :show
   end
 end
