@@ -8,8 +8,6 @@ defmodule QuantifiedSelfPhoenix.Food do
   schema "foods" do
     field :calories, :integer
     field :name, :string
-
-    timestamps()
   end
 
   @doc false
