@@ -5,7 +5,7 @@ defmodule QuantifiedSelfPhoenixWeb.Router do
     plug :accepts, ["json"]
   end
 
-  scope "/api/v1", QuantifiedSelfPhoenixWeb do
+  scope "/api/v1", QuantifiedSelfPhoenixWeb.Api.V1 do
     pipe_through :api
 
     get "/foods", FoodsController, :index 
