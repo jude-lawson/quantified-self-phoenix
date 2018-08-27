@@ -1,8 +1,6 @@
 defmodule QuantifiedSelfPhoenixWeb.FoodRequestsTest do
   use QuantifiedSelfPhoenixWeb.ConnCase
   alias QuantifiedSelfPhoenix.{Repo, Food}
-  # alias Ecto.Adapters.SQL, as: SQL
-  import Ecto.Query
 
   setup do
     Repo.query("DELETE FROM foods")
