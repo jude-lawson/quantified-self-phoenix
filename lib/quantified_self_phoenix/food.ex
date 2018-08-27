@@ -27,8 +27,8 @@ defmodule QuantifiedSelfPhoenix.Food do
                   select: %{name: f.name, calories: f.calories})
   end
 
-  def createFood(params) do
-    new_food_data = params["food"]
+  def createFood(new_food_data) do
+    # new_food_data = params["food"]
     new_food = Repo.insert!(%Food{name: new_food_data["name"], calories: new_food_data["calories"]})
     %{food: %{name: new_food.name, calories: new_food.calories } }
   end
