@@ -17,8 +17,11 @@ defmodule QuantifiedSelfPhoenixWeb.FoodRequestsTest do
       %{name: "Tacos", calories: 900},
       %{name: "Dumplings", calories: 1000}
     ]
+
     response = get conn, "/api/v1/foods"
     body = json_response(response, 200)
+
+    assert length(body) == length(expected)
     assert Enum.at(body, 0)["name"] == Enum.at(expected, 0)[:name]
     assert Enum.at(body, 0)["calories"] == Enum.at(expected, 0)[:calories]
     
