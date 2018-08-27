@@ -5,4 +5,8 @@ defmodule QuantifiedSelfPhoenixWeb.Api.V1.FoodsController do
   def index(conn, _params) do
     json conn, Food.allFoods()
   end
+
+  def show(conn, params) do
+    json conn, Food.findFood(Integer.parse(params["id"]) |> elem(0))
+  end
 end

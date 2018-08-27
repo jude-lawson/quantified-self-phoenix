@@ -23,4 +23,10 @@ defmodule QuantifiedSelfPhoenix.Food do
     Repo.all(from f in "foods", 
                   select: %{name: f.name, calories: f.calories})
   end
+
+  def findFood(id) do
+    Repo.one(from f in "foods",
+                  where: f.id == ^id,
+                  select: %{name: f.name, calories: f.calories})
+  end
 end
