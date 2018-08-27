@@ -45,12 +45,14 @@ defmodule QuantifiedSelfPhoenixWeb.FoodRequestsTest do
     test "should create a food in the database" do
       expected = %{ food: %{name: "Pizza", calories: 1200} }
 
-      conn = build_conn() |> put_req_header("content-type", "application/json")
+      conn = build_conn()
+              |> post("/api/v1/foods", food: "cool")
+              |> put_req_header("content-type", "application/json")
 
-      response = post conn, "/api/v1/foods", %{ food: %{name: "Pizza", calories: 1200} }
+      body = conn() |> response(200)
 
-      assert response["food"]["name"] == expected[:food][:name]
-      assert response["food"]["calories"] == expected[:food][:calories]
+      assert body["food"]["name"] == expected[:food][:name]
+      assert body["food"]["calories"] == expected[:food][:calories]
     end
 
     test "should return a 400 error if 'name' is not provided" do

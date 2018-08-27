@@ -2,8 +2,7 @@ defmodule QuantifiedSelfPhoenix.Food do
   use Ecto.Schema
   import Ecto.Changeset
   import Ecto.Query
-  alias QuantifiedSelfPhoenix.Repo
-
+  alias QuantifiedSelfPhoenix.{Repo, Food}
 
   schema "foods" do
     field :calories, :integer
@@ -26,5 +25,10 @@ defmodule QuantifiedSelfPhoenix.Food do
     Repo.one(from f in "foods",
                   where: f.id == ^id,
                   select: %{name: f.name, calories: f.calories})
+  end
+
+  def createFood(params) do
+    new_food = params["food"]
+    Repo.insert!(%Food{name: new_food["name"], calories: new_food["calories"]})
   end
 end
