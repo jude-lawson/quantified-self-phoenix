@@ -55,6 +55,10 @@ defmodule QuantifiedSelfPhoenixWeb.FoodRequestsTest do
     end
 
     test "should return a 400 error if 'calories' is not provided" do
+      conn = build_conn()
+                |> put_req_header("content-type", "application/json")
+                |> post("/api/v1/foods", %{ food: %{ name: "Pizza" } })
+      body = conn |> json_response(400)
     end
   end
 end
