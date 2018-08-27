@@ -13,45 +13,38 @@ defmodule QuantifiedSelfPhoenixWeb.FoodRequestsTest do
   describe "GET /api/v1/foods" do
     test "should get all persisted foods from the foods table" do
       expected = [
-        %{name: "Tacos", calories: 900},
-        %{name: "Dumplings", calories: 1000}
+        %{"name" => "Tacos", "calories" => 900},
+        %{"name" => "Dumplings", "calories" => 1000}
       ]
   
       response = get build_conn(), "/api/v1/foods"
       body = json_response(response, 200)
   
-      assert length(body) == length(expected)
-      assert Enum.at(body, 0)["name"] == Enum.at(expected, 0)[:name]
-      assert Enum.at(body, 0)["calories"] == Enum.at(expected, 0)[:calories]
-      
-      assert Enum.at(body, 1)["name"] == Enum.at(expected, 1)[:name]
-      assert Enum.at(body, 1)["calories"] == Enum.at(expected, 1)[:calories]
+      assert body == expected
     end
   end
   
   describe "GET /api/v1/foods/:id" do
     test "should return the food specified by the given id" do
-      expected = %{name: "Dumplings", calories: 1000}
+      expected = %{"name" => "Dumplings", "calories" => 1000}
   
       response = get build_conn(), "/api/v1/foods/2"
       body = json_response(response, 200)
   
-      assert body["name"] == expected[:name]
-      assert body["calories"] == expected[:calories]
+      assert body == expected
     end
   end
 
   describe "POST /api/v1/foods" do
     test "should create a food in the database" do
-      expected = %{ food: %{name: "Pizza", calories: 1200} }
+      expected = %{ "food" => %{"name" => "Pizza", "calories" => 1200} }
       conn = build_conn()
               |> put_req_header("content-type", "application/json")
               |> post("/api/v1/foods", %{ food: %{name: "Pizza", calories: 1200} })
     
       body = conn |> json_response(200)
 
-      assert body["food"]["name"] == expected[:food][:name]
-      assert body["food"]["calories"] == expected[:food][:calories]
+      assert body == expected
     end
 
     test "should return a 400 error if 'name' is not provided" do
