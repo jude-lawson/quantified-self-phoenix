@@ -119,7 +119,7 @@ defmodule QuantifiedSelfPhoenixWeb.FoodRequestsTest do
     end
 
     test "should return a 404 if the specified food is not" do
-      expected = %{ "message" => "The food with the id 999 cannot be found" }
+      expected = %{ "message" => "The food with the id 999 could not be found" }
 
       conn = build_conn()
               |> delete("/api/v1/foods/999")

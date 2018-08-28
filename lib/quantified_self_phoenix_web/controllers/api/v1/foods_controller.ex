@@ -33,4 +33,13 @@ defmodule QuantifiedSelfPhoenixWeb.Api.V1.FoodsController do
         json conn |> put_status(400), %{ error: "An error has occurred updating the food" }
     end
   end
+
+  def destroy(conn, params) do
+    result = Food.deleteFood(params["id"])
+    if !result do
+      json conn |> put_status(404), %{ message: "The food with the id #{params["id"]} could not be found"}
+    else
+      json conn |> put_status(204), %{ message: "'#{result.name}' has been deleted"}
+    end
+  end
 end

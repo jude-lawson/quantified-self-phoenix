@@ -39,4 +39,13 @@ defmodule QuantifiedSelfPhoenix.Food do
     {:ok, updated_food} = Repo.update(changeset)
     %{ food: %{ name: updated_food.name, calories: updated_food.calories } }
   end
+
+  def deleteFood(id) do
+    food = Food |> Repo.get(id)
+    if !food do
+      nil
+    else
+      food
+    end 
+  end
 end
