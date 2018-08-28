@@ -105,4 +105,15 @@ defmodule QuantifiedSelfPhoenixWeb.FoodRequestsTest do
       assert body == expected
     end
   end
+
+  describe "DELETE /api/v1/foods/:id" do
+    test "should delete the food specified by the given id" do
+      expected = %{ "message" => "'Tacos' has been deleted" }
+
+      conn = build_conn()
+              |> delete("/api/v1/foods/1")
+      
+      body = conn |> json_response(204)
+    end
+  end
 end
