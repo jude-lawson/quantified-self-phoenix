@@ -11,11 +11,6 @@ defmodule QuantifiedSelfPhoenixWeb.Api.V1.FoodsController do
   end
 
   def create(conn, params) do
-    # if params["food"]["name"] do
-    #   json conn, Food.createFood(params["food"])
-    # els
-    #   json conn |> put_status(400), %{ error: "Attribute 'name' is required"}
-    # end
       cond do
         !params["food"]["name"] && !params["food"]["calories"] ->
           json conn |> put_status(400), %{ error: "Attributes 'name' and 'calories' are both required" }
