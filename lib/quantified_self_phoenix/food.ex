@@ -37,7 +37,15 @@ defmodule QuantifiedSelfPhoenix.Food do
     food = Food |> Repo.get(id)
     changeset = Food.changeset(food, %{name: updated_food_data["name"], calories: updated_food_data["calories"]})
     {:ok, updated_food} = Repo.update(changeset)
-    require IEx; IEx.pry
     %{ food: %{ name: updated_food.name, calories: updated_food.calories } }
+  end
+
+  def deleteFood(id) do
+    food = Food |> Repo.get(id)
+    if !food do
+      nil
+    else
+      food
+    end 
   end
 end
