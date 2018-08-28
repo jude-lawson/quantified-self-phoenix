@@ -1,5 +1,6 @@
 defmodule QuantifiedSelfPhoenixWeb.MealRequestTest do
   use QuantifiedSelfPhoenixWeb.ConnCase
+  import Ecto.Query
   alias QuantifiedSelfPhoenix.{Repo, Food, Meal, MealFood}
 
   setup do
@@ -73,6 +74,24 @@ defmodule QuantifiedSelfPhoenixWeb.MealRequestTest do
       body = conn |> json_response(404)
 
       assert body == expected
+    end
+  end
+
+  describe "POST /api/v1/meals/:meal_id/foods/:id" do
+    test "should add the specified food to the specified meal" do
+      {:ok, food} = Repo.insert(%Food{name: "Fajitas", calories: 1000})
+      {:ok, meal} = Repo.insert(%Meal{name: "Lunch"})
+      expected = %{ "message" => "Successfully added #{food.name} to #{meal.name}"}
+
+      conn = build_conn()
+              |> post("/api/v1/meals/#{meal.id}/foods/#{food.id}")
+      
+      body = conn |> json_response(201)
+
+      new_meal_food = MealFood |> last |> Repo.one
+      assert body == expected
+      assert new_meal_food.food_id == food.id
+      assert new_meal_food.meal_id == meal.id
     end
   end
 end
