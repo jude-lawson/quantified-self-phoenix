@@ -68,5 +68,16 @@ defmodule QuantifiedSelfPhoenixWeb.FoodRequestsTest do
 
       assert body == expected
     end
+
+    test "should return 400 error if 'name' and 'calories' is not provided" do
+      expected = %{ "error" => "Attributes 'name' and 'calories' are both required" }
+
+      conn = build_conn()
+              |> put_req_header("content-type", "application/json")
+              |> post("/api/v1/foods", %{ food: %{} })
+      body = conn |> json_response(400)
+
+      assert body == expected
+    end
   end
 end
