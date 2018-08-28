@@ -48,7 +48,7 @@ defmodule QuantifiedSelfPhoenixWeb.FoodRequestsTest do
     end
 
     test "should return a 400 error if 'name' is not provided" do
-      expected = %{ "error" => "Attribute name is required" }
+      expected = %{ "error" => "Attribute 'name' is required" }
       
       conn = build_conn()
                 |> put_req_header("content-type", "application/json")
@@ -59,7 +59,7 @@ defmodule QuantifiedSelfPhoenixWeb.FoodRequestsTest do
     end
 
     test "should return a 400 error if 'calories' is not provided" do
-      expected = %{ "error" => "Attribute name is required" }
+      expected = %{ "error" => "Attribute 'calories' is required" }
 
       conn = build_conn()
                 |> put_req_header("content-type", "application/json")
