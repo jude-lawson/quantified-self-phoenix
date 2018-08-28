@@ -114,6 +114,19 @@ defmodule QuantifiedSelfPhoenixWeb.FoodRequestsTest do
               |> delete("/api/v1/foods/1")
       
       body = conn |> json_response(204)
+
+      assert body == expected
+    end
+
+    test "should return a 404 if the specified food is not" do
+      expected = %{ "message" => "The food with the id 999 cannot be found" }
+
+      conn = build_conn()
+              |> delete("/api/v1/foods/999")
+      
+      body = conn |> json_response(404)
+
+      assert body == expected
     end
   end
 end
