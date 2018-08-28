@@ -48,4 +48,31 @@ defmodule QuantifiedSelfPhoenixWeb.MealRequestTest do
       assert body == expected
     end
   end
+
+  describe "GET /api/v1/meals/:meal_id/foods" do
+    test "should get a meal and all of its foods" do
+      expected = %{"id" => 2, "name" => "Snack", "foods" => [
+        %{"id" => 1, "name" => "Cookies", "calories" => 800},
+        %{"id" => 2, "name" => "Chips", "calories" => 700}
+      ]}
+
+      conn = build_conn()
+              |> get("/api/v1/meals/2/foods")
+
+      body = conn |> json_response(200)
+
+      assert body == expected
+    end
+
+    test "should return a 404 if the meal is not found" do
+      expected = %{ "error" => "Meal with id 999 was not found" }
+
+      conn = build_conn()
+              |> get("/api/v1/meals/999/foods")
+      
+      body = conn |> json_response(404)
+
+      assert body == expected
+    end
+  end
 end
