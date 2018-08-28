@@ -30,6 +30,14 @@ defmodule QuantifiedSelfPhoenix.Food do
   def createFood(new_food_data) do
     # new_food_data = params["food"]
     new_food = Repo.insert!(%Food{name: new_food_data["name"], calories: new_food_data["calories"]})
-    %{food: %{name: new_food.name, calories: new_food.calories } }
+    %{ food: %{ name: new_food.name, calories: new_food.calories } }
+  end
+
+  def editFood(id, updated_food_data) do
+    food = Food |> Repo.get(id)
+    changeset = Food.changeset(food, %{name: updated_food_data["name"], calories: updated_food_data["calories"]})
+    {:ok, updated_food} = Repo.update(changeset)
+    require IEx; IEx.pry
+    %{ food: %{ name: updated_food.name, calories: updated_food.calories } }
   end
 end

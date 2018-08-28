@@ -11,5 +11,6 @@ defmodule QuantifiedSelfPhoenixWeb.Router do
     get "/foods", FoodsController, :index
     get "/foods/:id", FoodsController, :show
     post "/foods", FoodsController, :create
+    patch "/foods/:id", FoodsController, :edit
   end
 end
