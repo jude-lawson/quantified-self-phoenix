@@ -80,4 +80,18 @@ defmodule QuantifiedSelfPhoenixWeb.FoodRequestsTest do
       assert body == expected
     end
   end
+
+  describe "PATCH /api/v1/foods/:id" do
+    test "should update the food specified by the id" do
+      expected = %{ "food" => %{ "name" => "Pork Tacos", "calories" => 1100 } }
+      
+      conn = build_conn()
+              |> put_req_header("content-type", "application/json")
+              |> patch("/api/v1/foods/1", %{ food: %{ name: "Pork Tacos", calories: 1100 } })
+      
+      body = conn |> json_response(200)
+
+      assert body == expected
+    end
+  end
 end
