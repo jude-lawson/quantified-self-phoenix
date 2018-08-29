@@ -70,4 +70,40 @@ defmodule QuantifiedSelfPhoenixWeb.MealFoodRequestTest do
       assert body == expected
     end
   end
+
+  describe "DELETE /api/v1/meals/:meal_id/foods/:id" do
+    test "should remove the specified food from the specified meal" do
+      expected = %{ "message" => "Successfully removed Cookies from Snack" }
+
+      conn = build_conn()
+              |> delete("/api/v1/meals/2/foods/2")
+
+      body = conn |> json_response(200)
+
+      assert body == expected
+      refute MealFood |> Repo.get(2)
+    end
+
+    test "should return a 404 error if the meal cannot be found" do
+      expected = %{ "error" => "Meal with the id 999 could not be found" }
+
+      conn = build_conn()
+              |> delete("/api/v1/meals/999/foods/2")
+
+      body = conn |> json_response(404)
+
+      assert body == expected
+    end
+
+    test "should return a 404 error if the foood cannot be found" do
+      expected = %{ "error" => "Food with the id 999 could not be found" }
+
+      conn = build_conn()
+              |> delete("/api/v1/meals/2/foods/999")
+
+      body = conn |> json_response(404)
+
+      assert body == expected
+    end
+  end
 end
