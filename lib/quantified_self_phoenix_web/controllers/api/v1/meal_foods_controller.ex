@@ -18,4 +18,22 @@ defmodule QuantifiedSelfPhoenixWeb.Api.V1.MealFoodsController do
         json conn |> put_status(201), %{ message: "Successfully added #{food.name} to #{meal.name}"}
     end
   end
+
+  def destroy(conn, params) do
+    meal_id = Integer.parse(params["meal_id"]) |> elem(0)
+    food_id = Integer.parse(params["id"]) |> elem(0)
+
+    meal = Meal |> Repo.get(meal_id)
+    food = Food |> Repo.get(food_id)
+
+    cond do
+      !meal ->
+        json conn |> put_status(404), %{ error: "Meal with the id #{meal_id} could not be found"}
+      !food ->
+        json conn |> put_status(404), %{ error: "Food with the id #{food_id} could not be found"}
+      food && meal ->
+        MealFood.destroyMealFood(meal_id, food_id)
+        json conn |> put_status(200), %{ message: "Successfully removed #{food.name} from #{meal.name}"}
+    end
+  end
 end
