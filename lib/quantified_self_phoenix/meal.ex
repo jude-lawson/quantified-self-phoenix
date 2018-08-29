@@ -20,7 +20,7 @@ defmodule QuantifiedSelfPhoenix.Meal do
                                 INNER JOIN meals ON meal_foods.meal_id = meals.id
                                 INNER JOIN foods ON meal_foods.food_id = foods.id
                                 GROUP BY meals.id")
-    Enum.map(result.rows, fn row ->
+    meals = Enum.map(result.rows, fn row ->
       %{
         id: row |> Enum.at(0), 
         name: row |> Enum.at(1),
@@ -29,6 +29,7 @@ defmodule QuantifiedSelfPhoenix.Meal do
         end)
        } 
     end)
+    Enum.sort_by(meals, fn meal -> meal[:id] end)
   end
 
   def findMeal(meal_id) do

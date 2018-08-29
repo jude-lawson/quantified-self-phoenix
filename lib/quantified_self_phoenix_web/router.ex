@@ -18,5 +18,8 @@ defmodule QuantifiedSelfPhoenixWeb.Router do
     # Meals
     get "/meals", MealsController, :index
     get "/meals/:meal_id/foods", MealsController, :show
+
+    # MealFoods
+    post "/meals/:meal_id/foods/:id", MealFoodsController, :create
   end
 end
