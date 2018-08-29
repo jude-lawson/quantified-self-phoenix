@@ -21,5 +21,6 @@ defmodule QuantifiedSelfPhoenixWeb.Router do
 
     # MealFoods
     post "/meals/:meal_id/foods/:id", MealFoodsController, :create
+    delete "/meals/:meal_id/foods/:id", MealFoodsController, :destroy
   end
 end
