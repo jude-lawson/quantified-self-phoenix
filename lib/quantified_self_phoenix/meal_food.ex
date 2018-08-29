@@ -17,6 +17,7 @@ defmodule QuantifiedSelfPhoenix.MealFood do
 
   def createMealFood(meal_id, food_id) do
       {:ok, result} = Repo.insert(%MealFood{meal_id: meal_id, food_id: food_id})
+      require IEx; IEx.pry
       result
   end
 

@@ -14,7 +14,8 @@ defmodule QuantifiedSelfPhoenixWeb.Api.V1.MealFoodsController do
       !food ->
         json conn |> put_status(404), %{ error: "Food with id #{food_id} could not be found"}
       food && meal ->
-        json conn |> put_status(201), MealFood.createMealFood(meal_id, food_id)
+        MealFood.createMealFood(meal_id, food_id)
+        json conn |> put_status(201), %{ message: "Successfully added #{food.name} to #{meal.name}"}
     end
   end
 end
