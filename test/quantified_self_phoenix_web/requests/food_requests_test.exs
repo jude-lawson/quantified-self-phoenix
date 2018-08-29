@@ -40,7 +40,7 @@ defmodule QuantifiedSelfPhoenixWeb.FoodRequestsTest do
       expected = %{ "food" => %{"name" => "Pizza", "calories" => 1200} }
       conn = build_conn()
               |> put_req_header("content-type", "application/json")
-              |> post("/api/v1/foods", %{ food: %{name: "Pizza", calories: 1200} })
+              |> post("/api/v1/foods", %{ food: %{name: "Pizza", calories: "1200"} })
     
       body = conn |> json_response(200)
 
@@ -52,7 +52,7 @@ defmodule QuantifiedSelfPhoenixWeb.FoodRequestsTest do
       
       conn = build_conn()
                 |> put_req_header("content-type", "application/json")
-                |> post("/api/v1/foods", %{ food: %{ calories: 1200 } })
+                |> post("/api/v1/foods", %{ food: %{ calories: "1200" } })
       body = conn |> json_response(400)
 
       assert body == expected
@@ -87,7 +87,7 @@ defmodule QuantifiedSelfPhoenixWeb.FoodRequestsTest do
       
       conn = build_conn()
               |> put_req_header("content-type", "application/json")
-              |> patch("/api/v1/foods/1", %{ food: %{ name: "Pork Tacos", calories: 1100 } })
+              |> patch("/api/v1/foods/1", %{ food: %{ name: "Pork Tacos", calories: "1100" } })
       
       body = conn |> json_response(200)
 

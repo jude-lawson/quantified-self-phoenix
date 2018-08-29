@@ -29,7 +29,7 @@ defmodule QuantifiedSelfPhoenix.Food do
 
   def createFood(new_food_data) do
     # new_food_data = params["food"]
-    new_food = Repo.insert!(%Food{name: new_food_data["name"], calories: new_food_data["calories"]})
+    new_food = Repo.insert!(%Food{name: new_food_data["name"], calories: Integer.parse(new_food_data["calories"]) |> elem(0)})
     %{ food: %{ name: new_food.name, calories: new_food.calories } }
   end
 
