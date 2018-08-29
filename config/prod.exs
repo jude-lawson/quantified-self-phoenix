@@ -16,7 +16,7 @@ use Mix.Config
 config :quantified_self_phoenix, QuantifiedSelfPhoenixWeb.Endpoint,
   load_from_system_env: true,
   url: [scheme: "https", host: "peaceful-dusk-38517.herokuapp.com", port: 443],
-  force_ssl: [rewrite_on: [:x_forwarde_proto]],
+  force_ssl: [rewrite_on: [:x_forwarded_proto]],
   secret_key_base: Map.fetch!(System.get_env(), "SECRET_KEY_BASE")
 
 # Configure database for production
